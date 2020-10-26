@@ -65,7 +65,7 @@ const CityList = (props) => {
             margin: 5,
             fontWeight: 'bold',
             fontSize: 30,
-            color: 'blue',
+            color: '#80d6ff',
             textAlign: 'center',
           }}>
           Cities
@@ -76,7 +76,7 @@ const CityList = (props) => {
         />
         {isLoading ? (
           <ActivityIndicator
-            style={{justifyContent: 'center', alignItems: 'center'}}
+            style={{marginVertical: 200}}
             size="large"
             color="#80d6ff"
           />
@@ -85,7 +85,8 @@ const CityList = (props) => {
             keyExtractor={(_, index) => index.toString()}
             data={cityList}
             renderItem={renderCities}
-            ItemSeparatorComponent={renderSeperator}
+            ItemSeparatorComponent={renderSeperator,}
+            
           />
         )}
       </View>
