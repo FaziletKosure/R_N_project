@@ -1,6 +1,12 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, View, Text, FlatList} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 
 import {CityItem, SearchBar} from '../components';
 
@@ -8,14 +14,17 @@ let originalList = [];
 
 const CityList = (props) => {
   const [cityList, setCityList] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   // ASYNC-AWAIT
   const fetchCityData = async () => {
+    setLoading(true);
     const {data} = await axios.get(
       'https://opentable.herokuapp.com/api/cities',
     );
     setCityList(data.cities);
     originalList = [...data.cities];
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -51,19 +60,34 @@ const CityList = (props) => {
   return (
     <SafeAreaView>
       <View>
-        <Text style={{margin: 5, fontWeight: 'bold', fontSize: 30}}>
+        <Text
+          style={{
+            margin: 5,
+            fontWeight: 'bold',
+            fontSize: 30,
+            color: 'blue',
+            textAlign: 'center',
+          }}>
           Cities
         </Text>
         <SearchBar
           placeholder="Search a city..."
           onSearch={(value) => searchCity(value)}
         />
-        <FlatList
-          keyExtractor={(_, index) => index.toString()}
-          data={cityList}
-          renderItem={renderCities}
-          ItemSeparatorComponent={renderSeperator}
-        />
+        {isLoading ? (
+          <ActivityIndicator
+            style={{justifyContent: 'center', alignItems: 'center'}}
+            size="large"
+            color="#80d6ff"
+          />
+        ) : (
+          <FlatList
+            keyExtractor={(_, index) => index.toString()}
+            data={cityList}
+            renderItem={renderCities}
+            ItemSeparatorComponent={renderSeperator}
+          />
+        )}
       </View>
     </SafeAreaView>
   );

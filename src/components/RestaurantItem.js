@@ -6,6 +6,7 @@ import {
   Image,
   StyleSheet,
   Dimensions,
+  ImageBackground,
 } from 'react-native';
 
 const RestaurantItem = (props) => {
@@ -30,7 +31,7 @@ export {RestaurantItem};
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#bdbdbd',
+    backgroundColor: '#82e9de',
     padding: 10,
     margin: 5,
     borderRadius: 5,
