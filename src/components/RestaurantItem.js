@@ -13,10 +13,15 @@ const RestaurantItem = (props) => {
   return (
     <TouchableOpacity style={styles.container} onPress={props.onSelect}>
       <Image style={styles.image} source={{uri: props.restaurant.image_url}} />
-      <Text style={styles.name}>
-        {props.restaurant.name}
-        {`${'⭐'.repeat(props.restaurant.price)}`}
-      </Text>
+      <View
+        style={{
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexDirection: 'row',
+        }}>
+        <Text style={styles.name}>{props.restaurant.name}</Text>
+        <Text>{`${'⭐'.repeat(props.restaurant.price)}`}</Text>
+      </View>
     </TouchableOpacity>
   );
 };
